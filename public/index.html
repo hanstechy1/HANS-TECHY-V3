@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HANS TECHY V2 - Pairing</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #0f172a; color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: #1e293b; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); width: 100%; max-width: 400px; text-align: center; }
+        input { width: 100%; padding: 12px; margin: 15px 0; border: 1px solid #475569; background: #0f172a; color: #fff; border-radius: 8px; font-size: 16px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #25d366; color: #fff; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; }
+        button:hover { background: #20ba5a; }
+        #result { margin-top: 20px; font-size: 16px; font-weight: bold; color: #38bdf8; word-break: break-all; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>HANS TECHY V2</h2>
+        <p>Enter your WhatsApp number (e.g., 255686......)</p>
+        <input type="text" id="phone" placeholder="255686......">
+        <button onclick="getPairCode()">Get Pair Code</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        async function getPairCode() {
+            const phone = document.getElementById('phone').value;
+            const resultDiv = document.getElementById('result');
+            
+            if(!phone) {
+                alert('Please enter your phone number');
+                return;
+            }
+
+            resultDiv.innerHTML = "Generating Pair Code...";
+
+            try {
+                const res = await fetch(`/pair?phone=${phone}`);
+                const data = await res.json();
+
+                if(data.status) {
+                    resultDiv.innerHTML = `Your Pair Code is: <br><span style="font-size: 24px; color: #25d366;">${data.code}</span>`;
+                } else {
+                    resultDiv.innerHTML = "Failed: " + data.message;
+                }
+            } catch (e) {
+                resultDiv.innerHTML = "A network error occurred.";
+            }
+        }
+    </script>
+</body>
+</html>
