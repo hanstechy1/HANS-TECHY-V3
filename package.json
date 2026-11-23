@@ -1,5 +1,5 @@
 {
-    "name": "june-x-ultra",
+    "name": "HANS TECHY V3",
     "version": "3.0.4",
     "description": "WhatsApp MD-Style Multi-Command Bot by Supreme",
     "main": "index.js",
@@ -12,7 +12,7 @@
     },
     "keywords": [
         "whatsapp bot",
-        "June-Ultra",
+        "HANS TECHY V3",
         "bot",
         "baileys",
         "library"
